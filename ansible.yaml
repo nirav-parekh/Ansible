@@ -8,6 +8,11 @@
   - name: Download WAR to server
     command: wget https://s3.amazonaws.com/mynewtesting/jararchive/target/SimpleTomcatWebApp.war -O {{ warRemotePath }}/{{ warName }}
   
+  - name: Unzip WAR file
+    unarchive: src={{ warRemotePath }}/{{ warName }} dest=/var/lib/tomcat9/webapps/ROOT/ copy=no mode=0755 owner=tomcat9 group=tomcat9
+    notify:
+        - restart tomcat9
+ 
   handlers:
     - name: Restart tomcat9
       service: name=tomcat9 state=restarted
