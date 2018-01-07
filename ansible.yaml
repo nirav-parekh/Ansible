@@ -1,12 +1,12 @@
 ---
-- hosts: tomcatServer
+- hosts: TomcatServer
   vars:
-  - warName: helloworld.war
-  - warRemotePath: /path/to/put/war
+  - warName: SimpleTomcatWebApp.war
+  - warRemotePath: /usr/local/apache-tomcat-9.0.2/webapps
 
   tasks:
   - name: Download WAR to server
-    command: wget http://example.com/file.war -O {{ warRemotePath }}/{{ warName }}
+    command: wget https://s3.amazonaws.com/mynewtesting/jararchive/target/SimpleTomcatWebApp.war -O {{ warRemotePath }}/{{ warName }}
   
   handlers:
     - name: Restart tomcat9
