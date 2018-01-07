@@ -1,0 +1,13 @@
+---
+- hosts: tomcatServer
+  vars:
+  - warName: helloworld.war
+  - warRemotePath: /path/to/put/war
+
+  tasks:
+  - name: Download WAR to server
+    command: wget http://example.com/file.war -O {{ warRemotePath }}/{{ warName }}
+  
+  handlers:
+    - name: Restart tomcat9
+      service: name=tomcat9 state=restarted
